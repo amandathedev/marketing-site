@@ -1,73 +1,77 @@
-# React + TypeScript + Vite
+# Cattlytx Marketing Site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Marketing site for **Cattlytx**, built with Vite + React + TypeScript and a dark, token-based theme.
 
-Currently, two official plugins are available:
+## Development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open the URL printed in your terminal (usually `http://localhost:5173`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Build
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build
+npm run preview
 ```
+
+## Prerendering (static HTML)
+
+This project uses `@prerenderer/rollup-plugin` during build to prerender routes.
+
+You can disable prerendering for environments where headless Chromium is unavailable.
+
+- **Disable prerender**:
+
+```bash
+DISABLE_PRERENDER=true npm run build
+```
+
+- **Vercel**: prerender is automatically disabled when `VERCEL=1`.
+
+## Editing site content
+
+Most page copy and section layout lives in:
+
+- `src/App.tsx`
+
+Theme tokens live in:
+
+- `src/index.css`
+
+## Screenshots / marketing assets
+
+Assets are served from `public/` and referenced by absolute paths (e.g. `/screenshots/...`).
+
+- **Dashboard screenshot**
+  - Desktop/tablet: `public/screenshots/dashboard.webp`
+  - Mobile: `public/screenshots/mobile_dashboard.png`
+
+- **Pens screenshot**
+  - Desktop/tablet: `public/screenshots/pens_screenshot.webp`
+  - Mobile: `public/screenshots/pens_mobile.png`
+
+## Team headshots + LinkedIn links
+
+Team tiles link to LinkedIn and optionally render headshots when configured in `src/App.tsx`.
+
+Headshots currently live at:
+
+- `public/team/andrew_headshot.webp`
+- `public/team/jeff_headshot.webp`
+- `public/team/garrett_headshot.webp`
+- `public/team/amanda_headshot.webp`
+
+## Project scripts
+
+- `npm run dev`: start dev server
+- `npm run build`: typecheck + production build
+- `npm run preview`: preview production build locally
+
+## Tech
+
+- Vite + React + TypeScript
+- Tailwind CSS (via `@import 'tailwindcss'` in `src/index.css`)
