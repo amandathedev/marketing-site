@@ -1,0 +1,73 @@
+@import 'tailwindcss';
+
+/* ── Brand tokens ── */
+:root {
+  --brand: #F97316;
+  --brand-hover: #EA580C;
+
+  --bg: #0b1019;
+  --bg-surface: #141c2b;
+  --bg-elevated: #1a263d;
+
+  --text-primary: rgba(255, 255, 255, 0.92);
+  --text-secondary: rgba(255, 255, 255, 0.72);
+  --text-muted: rgba(255, 255, 255, 0.52);
+
+  --border: #374151;
+  --border-hover: #4B5563;
+
+  --success: #22C55E;
+  --accent-teal: #2DD4BF;
+}
+
+/* ── Base reset ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Clickable elements ── */
+a,
+button,
+[role='button'],
+input[type='button'],
+input[type='submit'],
+input[type='reset'],
+summary,
+select,
+label {
+  cursor: pointer;
+}
+
+/* ── Scrollbar (subtle) ── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+
+/* ── Focus ring ── */
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(249, 115, 22, 0.3);
+  color: white;
+}
