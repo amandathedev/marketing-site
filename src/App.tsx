@@ -23,7 +23,7 @@ const API_URL = import.meta.env.VITE_API_URL ?? '';
 const NAV_LINKS = [
   { label: 'Features', href: '#features' },
   { label: 'Platform', href: '#platform' },
-  { label: 'Roadmap', href: '#roadmap' },
+  { label: 'Save time', href: '#today' },
   { label: 'Team', href: '#team' },
 ];
 
@@ -69,30 +69,21 @@ const PLATFORM_POINTS = [
   'Secure, cloud-hosted infrastructure',
 ];
 
-const ROADMAP = [
+const WHAT_YOU_GET_TODAY = [
   {
-    phase: 1,
-    title: 'Operational visibility',
-    desc: 'Daily headcounts, intake tracking, treatments, and death loss — in one system.',
-    status: 'live' as const,
+    title: 'AMS dashboard on mobile',
+    desc: 'Check headcounts, treatments, and feed events from your phone with daily updates.',
+    icon: Activity,
   },
   {
-    phase: 2,
-    title: 'Historical context',
-    desc: 'Overlay past performance and environmental patterns to spot trends over time.',
-    status: 'inProgress' as const,
+    title: 'Pen & lot analytics',
+    desc: 'Pen-level detail for intake and performance, with yard-wide rollups for quick checks.',
+    icon: BarChart3,
   },
   {
-    phase: 3,
-    title: 'Decision support',
-    desc: 'Turn intake shifts and health signals into clear, actionable recommendations.',
-    status: 'upcoming' as const,
-  },
-  {
-    phase: 4,
-    title: 'Market context',
-    desc: 'Connect yard performance to pricing and market conditions.',
-    status: 'upcoming' as const,
+    title: 'Invoice reconciliation',
+    desc: 'Review charges against what hit the yard so you can catch discrepancies early.',
+    icon: ClipboardList,
   },
 ];
 
@@ -359,41 +350,28 @@ function Platform() {
   );
 }
 
-function Roadmap() {
+function WhatYouGetToday() {
   return (
-    <section id="roadmap" className="scroll-mt-20 border-t-0 border-[var(--border)] py-16 md:py-24">
+    <section id="today" className="scroll-mt-20 border-t-0 border-[var(--border)] py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="text-center">
-          <h2 className="text-3xl font-bold md:text-4xl">Product roadmap</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-[var(--text-secondary)]">
-            We&apos;re focused on operational visibility first
-          </p>
+          <h2 className="text-3xl font-bold md:text-4xl">Where we save you time</h2>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {ROADMAP.map((step) => (
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {WHAT_YOU_GET_TODAY.map((item) => (
             <div
-              key={step.phase}
+              key={item.title}
               className="rounded-xl border border-[var(--border)] bg-[var(--bg-surface)] px-5 py-4 transition-colors hover:border-[var(--border-hover)]"
             >
-              <div className="mb-3 flex items-start justify-between">
-                <span className="text-xs font-medium tracking-wide text-[var(--text-secondary)]">
-                  Phase {step.phase}
-                </span>
-                {step.status === 'live' && (
-                  <span className="rounded-full border border-[#22C55E]/35 bg-[#22C55E]/12 px-2 py-0.5 text-[11px] font-semibold text-[#86EFAC]">
-                    Live
-                  </span>
-                )}
-                {step.status === 'inProgress' && (
-                  <span className="rounded-full border border-[var(--brand)]/35 bg-[var(--brand)]/12 px-2 py-0.5 text-[11px] font-semibold text-[var(--brand)]">
-                    In Progress
-                  </span>
-                )}
+              <div className="mb-3 flex items-start gap-3">
+                <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--brand)]/10">
+                  <item.icon size={20} className="text-[var(--brand)]" />
+                </div>
+                <h3 className="text-lg font-semibold leading-snug">{item.title}</h3>
               </div>
-              <h3 className="text-lg font-semibold">{step.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
-                {step.desc}
+                {item.desc}
               </p>
             </div>
           ))}
@@ -602,7 +580,7 @@ export default function App() {
         <Features />
         <Screenshot />
         <Platform />
-        <Roadmap />
+        <WhatYouGetToday />
         <Team />
         <Contact />
       </main>
