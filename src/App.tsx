@@ -15,6 +15,20 @@ import { useState, useEffect } from 'react';
 import { track } from './lib/analytics';
 import { ChatWidget } from './components/chat/ChatWidget';
 
+const isChatEnabledForThisVisitor = () => {
+  // Only runs in the browser
+  if (typeof window === 'undefined') return false;
+
+  const params = new URLSearchParams(window.location.search);
+  const chat = params.get('chat') === '1';
+  const key = params.get('k') || '';
+
+  const secret = import.meta.env.VITE_CHAT_SECRET || '';
+
+  // Require both: explicit opt-in + matching secret
+  return Boolean(chat && secret && key && key === secret);
+};
+
 /* ────────────────────────────────────────────────────────────
    Data
    ──────────────────────────────────────────────────────────── */
@@ -586,7 +600,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-      <ChatWidget />
+      {isChatEnabledForThisVisitor() ? <ChatWidget /> : null}
     </>
   );
 }
