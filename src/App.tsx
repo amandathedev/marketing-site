@@ -16,17 +16,16 @@ import { track } from './lib/analytics';
 import { ChatWidget } from './components/chat/ChatWidget';
 
 const isChatEnabledForThisVisitor = () => {
-  // Only runs in the browser
   if (typeof window === 'undefined') return false;
 
   const params = new URLSearchParams(window.location.search);
   const chat = params.get('chat') === '1';
-  const key = params.get('k') || '';
+  const pin = (params.get('pin') || '').trim();
 
-  const secret = import.meta.env.VITE_CHAT_SECRET || '';
+  const expected = (import.meta.env.VITE_CHAT_PIN || '').trim();
 
-  // Require both: explicit opt-in + matching secret
-  return Boolean(chat && secret && key && key === secret);
+  // Require explicit opt-in + correct pin
+  return Boolean(chat && expected && pin && pin === expected);
 };
 
 /* ────────────────────────────────────────────────────────────
